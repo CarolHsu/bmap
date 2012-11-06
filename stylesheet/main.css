@@ -1,0 +1,38 @@
+body {
+  font-family: Verdana, "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  color: #444;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+html{
+  height: 100%;
+}
+
+#header{
+  height: 150px;
+  background-image:url(image/old_mathematics.png);
+}
+
+#content.container-fluid{
+  height: 90%;
+}
+
+.row-fluid,.span9{
+  height: 90%;
+}
+
+.span3{
+  height: 600px;
+}
+
+
+#map {
+  height: 100%;
+}
+
+#sidebar {
+  height: 100%;
+}
