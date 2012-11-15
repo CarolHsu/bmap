@@ -102,7 +102,7 @@
                 </li>
               </ul>
               <ul class="nav pull-right">
-                <li><a>資料最後更新時刻 - 2012 年 11 月 15 日 09:45:26</a></li>
+                <li><a>资料最后更新时刻 - 2012 年 11 月 15 日 09:45:26</a></li>
               </ul>
             </div>
           </div>
@@ -184,11 +184,13 @@ var pt = new BMap.Point(120.891992,31.460912);
 var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
 var marker1 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
 map.addOverlay(marker1);
+marker1.setAnimation(BMAP_ANIMATION_BOUNCE);
 
 var pt = new BMap.Point(120.879559,31.456846);
 var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
 var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
 map.addOverlay(marker2);
+marker2.setAnimation(BMAP_ANIMATION_BOUNCE);
 
 polyline1.hide();
 polyline2.hide();
