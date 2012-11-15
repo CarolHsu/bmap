@@ -5,15 +5,18 @@ body {
   color: #444;
   background-color: #ffffff;
   height: 100%;
+  background-image:url(image/old_mathematics.png);
 }
 
 html{
   height: 100%;
+
 }
 
 #header{
-  height: 150px;
-  background-image:url(image/old_mathematics.png);
+  height: 200px;
+  background-image:url(image/retina_wood.png);
+  padding:20px;
 }
 
 #content.container-fluid{
@@ -35,4 +38,20 @@ html{
 
 #sidebar {
   height: 100%;
+}
+
+.horselight {
+  overflow-style: marquee-line;   /* W3C(標準用法) */
+  marquee-style: scroll;      /* W3C(標準用法) */
+  marquee-play-count: infinite;   /* W3C(標準用法) */
+
+  overflow: -webkit-marquee;    /* Chrome, Safari 必加 */
+  -webkit-marquee-style: scroll;    /* Chrome, Safari */
+  -webkit-marquee-repetition: infinite; /* Chrome, Safari */
+}
+
+.head-shadow{
+  -moz-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+  -webkit-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+  box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
 }
