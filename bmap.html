@@ -28,7 +28,9 @@
     </script>
 
     <div id="header" class="container-fluid">
-      <div class="span1"></div>
+      <div class="span1">
+        <input type="button" value="GetJson" onclick="loadJSON();"/>
+      </div>
       <div class="span10">
          <div id="myCarousel" class="carousel slide head-shadow"> 
                 <div class="carousel-inner">
@@ -82,10 +84,6 @@
             </a>
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" onmouseover="this.style.cursor='pointer'">
-                  图例说明<i class="caret"></i></a> 
-                <ul class="dropdown-menu">
                   <li><a onclick="showPolyline()" onmouseover="this.style.cursor='pointer'"><img src="stylesheet/image/road.gif">  即时路段绩效</a></li>       
                   <li><a onclick="showVD()" onmouseover="this.style.cursor='pointer'"><img src="stylesheet/image/vd.gif">  车辆侦测器</a></li>
                   <li><a onclick="showCMS()" onmouseover="this.style.cursor='pointer'"><img src="stylesheet/image/cms.gif">  信息可变标志面版</a></li>
@@ -98,8 +96,6 @@
                   <li><a href="#"><img src="stylesheet/image/warning.gif">  路况事件</a></li>
                   <li><a href="#"><img src="stylesheet/image/activity.gif">  定点活动讯息</a></li>
                   -->
-                </ul>
-                </li>
               </ul>
               <ul class="nav pull-right">
                 <li><a>资料最后更新时刻 - 2012 年 11 月 15 日 09:45:26</a></li>
@@ -147,57 +143,6 @@
 </html>
 
 <script type="text/javascript">
-var map = new BMap.Map("map");            // 创建Map实例
-var point = new BMap.Point(120.8792,31.4570);    // 创建点坐标
-map.centerAndZoom(point,15);                     // 初始化地图,设置中心点坐标和地图级别。
-map.enableScrollWheelZoom();                            //启用滚轮放大缩小
-//左鍵坐標
-// map.addEventListener("click",function(e){
-//     alert(e.point.lng + "," + e.point.lat);
-// });
-var polyline1 = new BMap.Polyline([
-  new BMap.Point(120.859869,31.465655),
-  new BMap.Point(120.865258,31.465039),
-  new BMap.Point(120.877978,31.465347),
-  new BMap.Point(120.878338,31.460604),
-  new BMap.Point(120.879559,31.456723),
-  new BMap.Point(120.883799,31.456784),
-  new BMap.Point(120.887752,31.458571),
-  new BMap.Point(120.891633,31.460912)
-], {strokeColor:"#ff9900", strokeWeight:6, strokeOpacity:0.5});
-map.addOverlay(polyline1);
-var polyline2 = new BMap.Polyline([
-  new BMap.Point(120.892208,31.48321),
-  new BMap.Point(120.891776,31.449761),
-  new BMap.Point(120.892136,31.431029)
-], {strokeColor:"#009900", strokeWeight:6, strokeOpacity:0.5});
-map.addOverlay(polyline2);
-var polyline3 = new BMap.Polyline([
-  new BMap.Point(120.855988,31.464423),
-  new BMap.Point(120.854622,31.457277),
-  new BMap.Point(120.8557,31.456107),
-  new BMap.Point(120.854407,31.451301)
-], {strokeColor:"#ff0000", strokeWeight:6, strokeOpacity:0.5});
-map.addOverlay(polyline3);
-
-var pt = new BMap.Point(120.891992,31.460912);
-var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
-var marker1 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-map.addOverlay(marker1);
-marker1.setAnimation(BMAP_ANIMATION_BOUNCE);
-
-var pt = new BMap.Point(120.879559,31.456846);
-var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
-var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-map.addOverlay(marker2);
-marker2.setAnimation(BMAP_ANIMATION_BOUNCE);
-
-polyline1.hide();
-polyline2.hide();
-polyline3.hide();
-marker1.hide();
-marker2.hide();
-
 var scrollAmount = 0;
 
 function scr() {
@@ -218,34 +163,105 @@ function updateTime(){
 }
 
 
-function showPolyline(){
-  scrollAmount = 0;
-  scr();
-  polyline1.show();
-  polyline2.show();
-  polyline3.show();
-  marker1.hide();
-  marker2.hide();
+var map = new BMap.Map("map");            // 创建Map实例
+var point = new BMap.Point(120.8792,31.4570);    // 创建点坐标
+map.centerAndZoom(point,15);                     // 初始化地图,设置中心点坐标和地图级别。
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+//左鍵坐標
+map.addEventListener("click",function(e){
+    alert(e.point.lng + "," + e.point.lat);
+});
+
+//json
+function loadJSON(){
+  $.ajax({
+    url:"JSON/data.json",
+    type:"GET",
+    datatype:"json",
+    success: function(data){
+      alert("Success!");
+      alert(data);
+    },
+    error: function(){
+      alert("error...");
+    }
+  });
 }
 
-function showVD(){
-  scrollAmount = 0;
-  scr();
-  polyline1.hide();
-  polyline2.hide();
-  polyline3.hide();
-  marker1.show();
-  marker2.hide();
+
+// var polyline1 = new BMap.Polyline([
+//   new BMap.Point(120.859869,31.465655),
+//   new BMap.Point(120.865258,31.465039),
+//   new BMap.Point(120.877978,31.465347),
+//   new BMap.Point(120.878338,31.460604),
+//   new BMap.Point(120.879559,31.456723),
+//   new BMap.Point(120.883799,31.456784),
+//   new BMap.Point(120.887752,31.458571),
+//   new BMap.Point(120.891633,31.460912)
+// ], {strokeColor:"#ff9900", strokeWeight:6, strokeOpacity:0.5});
+// map.addOverlay(polyline1);
+// var polyline2 = new BMap.Polyline([
+//   new BMap.Point(120.892208,31.48321),
+//   new BMap.Point(120.891776,31.449761),
+//   new BMap.Point(120.892136,31.431029)
+// ], {strokeColor:"#009900", strokeWeight:6, strokeOpacity:0.5});
+// map.addOverlay(polyline2);
+// var polyline3 = new BMap.Polyline([
+//   new BMap.Point(120.855988,31.464423),
+//   new BMap.Point(120.854622,31.457277),
+//   new BMap.Point(120.8557,31.456107),
+//   new BMap.Point(120.854407,31.451301)
+// ], {strokeColor:"#ff0000", strokeWeight:6, strokeOpacity:0.5});
+// map.addOverlay(polyline3);
+
+// var pt = new BMap.Point(120.891992,31.460912);
+// var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
+// var marker1 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+// map.addOverlay(marker1);
+// marker1.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+// var pt = new BMap.Point(120.879559,31.456846);
+// var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
+// var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+// map.addOverlay(marker2);
+// marker2.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+// polyline1.hide();
+// polyline2.hide();
+// polyline3.hide();
+// marker1.hide();
+// marker2.hide();
+
+// function showPolyline(){
+//   scrollAmount = 0;
+//   scr();
+//   polyline1.show();
+//   polyline2.show();
+//   polyline3.show();
+//   marker1.hide();
+//   marker2.hide();
+// }
+
+// function showVD(){
+//   scrollAmount = 0;
+//   scr();
+//   polyline1.hide();
+//   polyline2.hide();
+//   polyline3.hide();
+//   marker1.show();
+//   marker2.hide();
   
-}
+// }
 
-function showCMS(){
-  scrollAmount = 0;
-  scr();
-  polyline1.hide();
-  polyline2.hide();
-  polyline3.hide();
-  marker1.hide();
-  marker2.show();  
-}
+// function showCMS(){
+//   scrollAmount = 0;
+//   scr();
+//   polyline1.hide();
+//   polyline2.hide();
+//   polyline3.hide();
+//   marker1.hide();
+//   marker2.show();  
+// }
+
+
 </script>
