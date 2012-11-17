@@ -196,6 +196,7 @@ function loadDATA(callback){
 setTimeout(loadDATA(), 10);
 
 function showCMS(){
+   scr();
   map.clearOverlays();
   cmses = new Array(data.cms.length);
   for(var i = 0; i < data.cms.length; i++){
@@ -208,6 +209,7 @@ function showCMS(){
 }
 
 function showVD(){
+   scr();
   map.clearOverlays();
   vds = new Array(data.vd.length);
   for(var i = 0; i < data.vd.length; i++){
@@ -220,6 +222,7 @@ function showVD(){
 }
 
 function showPolyline(){
+   scr();
   map.clearOverlays();
   routes = new Array(data.route.length);
   for(var i = 0; i < data.route.length; i++){
@@ -235,88 +238,10 @@ function showPolyline(){
       color = "#009900"
     }
     for(var j = 0; j < data.route[i].points.length; j++){
-      points[j] = new BMap.Point(data.routes[i].points[j].lng,data.routes[i].points[j].lat);
+      points[j] = new BMap.Point(data.route[i].points[j].lng,data.route[i].points[j].lat);
     }
     routes[i] = new BMap.Polyline(points,{strokeColor:color, strokeWeight:6, strokeOpacity:0.5});
     map.addOverlay(routes[i]);
   }
 }
-
-
-
-// var polyline1 = new BMap.Polyline([
-//   new BMap.Point(120.859869,31.465655),
-//   new BMap.Point(120.865258,31.465039),
-//   new BMap.Point(120.877978,31.465347),
-//   new BMap.Point(120.878338,31.460604),
-//   new BMap.Point(120.879559,31.456723),
-//   new BMap.Point(120.883799,31.456784),
-//   new BMap.Point(120.887752,31.458571),
-//   new BMap.Point(120.891633,31.460912)
-// ], {strokeColor:"#ff9900", strokeWeight:6, strokeOpacity:0.5});
-// map.addOverlay(polyline1);
-// var polyline2 = new BMap.Polyline([
-//   new BMap.Point(120.892208,31.48321),
-//   new BMap.Point(120.891776,31.449761),
-//   new BMap.Point(120.892136,31.431029)
-// ], {strokeColor:"#009900", strokeWeight:6, strokeOpacity:0.5});
-// map.addOverlay(polyline2);
-// var polyline3 = new BMap.Polyline([
-//   new BMap.Point(120.855988,31.464423),
-//   new BMap.Point(120.854622,31.457277),
-//   new BMap.Point(120.8557,31.456107),
-//   new BMap.Point(120.854407,31.451301)
-// ], {strokeColor:"#ff0000", strokeWeight:6, strokeOpacity:0.5});
-// map.addOverlay(polyline3);
-
-// var pt = new BMap.Point(120.891992,31.460912);
-// var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
-// var marker1 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-// map.addOverlay(marker1);
-// marker1.setAnimation(BMAP_ANIMATION_BOUNCE);
-
-// var pt = new BMap.Point(120.879559,31.456846);
-// var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
-// var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-// map.addOverlay(marker2);
-// marker2.setAnimation(BMAP_ANIMATION_BOUNCE);
-
-// polyline1.hide();
-// polyline2.hide();
-// polyline3.hide();
-// marker1.hide();
-// marker2.hide();
-
-// function showPolyline(){
-//   scrollAmount = 0;
-//   scr();
-//   polyline1.show();
-//   polyline2.show();
-//   polyline3.show();
-//   marker1.hide();
-//   marker2.hide();
-// }
-
-// function showVD(){
-//   scrollAmount = 0;
-//   scr();
-//   polyline1.hide();
-//   polyline2.hide();
-//   polyline3.hide();
-//   marker1.show();
-//   marker2.hide();
-  
-// }
-
-// function showCMS(){
-//   scrollAmount = 0;
-//   scr();
-//   polyline1.hide();
-//   polyline2.hide();
-//   polyline3.hide();
-//   marker1.hide();
-//   marker2.show();  
-// }
-
-
 </script>
