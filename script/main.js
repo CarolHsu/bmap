@@ -52,6 +52,7 @@ function showCMS(){
       var cms = new BMap.Marker(new BMap.Point(data.cms[x].lng,data.cms[x].lat),{icon:myIcon});
       map.addOverlay(cms);
       cms.show();
+      cms.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
         width: 200,
         height: 80,
@@ -78,6 +79,7 @@ function showVD(){
       var vd = new BMap.Marker(new BMap.Point(data.vd[x].lng,data.vd[x].lat), {icon:myIcon});
       map.addOverlay(vd);
       vd.show();
+      vd.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
         width: 200,
         height: 80,
@@ -103,6 +105,7 @@ function showPolyline(){
         var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length/2].lng,data.route[x].points[data.route[x].points.length/2].lat));
         map.addOverlay(routeMarker);
         routeMarker.show();
+        routeMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
         var windowOpt = {
           width: 300,
           height: 150,
