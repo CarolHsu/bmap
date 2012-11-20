@@ -18,21 +18,13 @@ function updateTime(){
 }
 
 
-var map = new BMap.Map("map");            // 创建Map实例
-var point = new BMap.Point(120.8792,31.4570);    // 创建点坐标
-map.centerAndZoom(point,15);                     // 初始化地图,设置中心点坐标和地图级别。
-map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+var map = new BMap.Map("map");
+var point = new BMap.Point(120.8792,31.4570);
+map.centerAndZoom(point,15);
+map.enableScrollWheelZoom();
 map.addControl(new BMap.NavigationControl());
-//左鍵坐標
-// map.addEventListener("click",function(e){
-//     alert(e.point.lng + "," + e.point.lat);
-// });
 
-//json
-
-// var routes;
-// var cmses;
-// var vds;
+//json data
 var data;
 
 function loadDATA(callback){
@@ -42,20 +34,18 @@ function loadDATA(callback){
     dataType:"json",
     success: function(json){
       data = json;
-      //setTimeout(loadDATA(), 60000);
+      setTimeout(loadDATA(), 60000);
     },
     error: function(){
       alert("error...");
     }
   });
 }
-// var data = loadDATA();
-setTimeout(loadDATA(), 10);
+setTimeout(loadDATA(), 1);
 
 function showCMS(){
   scr();
   map.clearOverlays();
-  cmses = new Array(data.cms.length);
   var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
   for(var i = 0; i < data.cms.length; i++){
     (function(x){
@@ -63,67 +53,79 @@ function showCMS(){
       map.addOverlay(cms);
       cms.show();
       var windowOpt = {
-        width: 250,
-        height: 100,
+        width: 200,
+        height: 80,
         title: "<strong>" + data.cms[x].name + "</strong>"
       }
       var windowContent = "";
       for(var j = 0; j < data.cms[x].info.length; j++){
-        windowContent += "<p>" + data.cms[x].info[j] + "</p>";
+        windowContent += data.cms[x].info[j] + "<br />";
       }
       var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
       cms.addEventListener("click", function(){
         this.openInfoWindow(infoWindow);
       });
     })(i);
-    
-    // var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
-    // cmses[i] = new BMap.Marker(new BMap.Point(data.cms[i].lng,data.cms[i].lat),{icon:myIcon});
-    // map.addOverlay(cmses[i]);
-    // cmses[i].setAnimation(BMAP_ANIMATION_BOUNCE);
-    // cmses[i].show();
-    // var innerHTML;
-    // for(var j = 0; j < data.cms[i].info.length; j++){
-    //   innerHTML += "<p>" + data.cms[i].info[j] + "</p>";
-    // }
-    // var infoWindow = new BMap.InfoWindow(innerHTML);
-    // cmses[i].addEventListener("click", function(){this.openInfoWindow(infoWindow);});
   }
 }
 
 function showVD(){
   scr();
   map.clearOverlays();
-  vds = new Array(data.vd.length);
+  var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
   for(var i = 0; i < data.vd.length; i++){
-    var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
-    vds[i] = new BMap.Marker(new BMap.Point(data.vd[i].lng,data.vd[i].lat),{icon:myIcon});
-    map.addOverlay(vds[i]);
-    vds[i].setAnimation(BMAP_ANIMATION_BOUNCE);
-    vds[i].show();
+    (function(x){
+      var vd = new BMap.Marker(new BMap.Point(data.vd[x].lng,data.vd[x].lat), {icon:myIcon});
+      map.addOverlay(vd);
+      vd.show();
+      var windowOpt = {
+        width: 200,
+        height: 80,
+        title: "<strong>" + data.vd[x].name + "</strong>"
+      }
+      var windowContent = "平均速度 : " + data.vd[x].info.avgspeed + "<br />最大流量 : " + data.vd[x].info.bigvolumn;
+      var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
+      vd.addEventListener("click", function(){
+        this.openInfoWindow(infoWindow);
+      });
+    })(i);
   }
 }
 
 function showPolyline(){
   scr();
   map.clearOverlays();
-  routes = new Array(data.route.length);
   for(var i = 0; i < data.route.length; i++){
-    var color;
-    var points = new Array(data.route[i].points.length);
-    if(data.route[i].speed < 19){
-      color = "#ff0000";
-    }
-    else if(data.route[i].speed >= 19 && data.route[i].speed < 40){
-      color = "#ff9900";
-    }
-    else{
-      color = "#009900"
-    }
-    for(var j = 0; j < data.route[i].points.length; j++){
-      points[j] = new BMap.Point(data.route[i].points[j].lng,data.route[i].points[j].lat);
-    }
-    routes[i] = new BMap.Polyline(points,{strokeColor:color, strokeWeight:6, strokeOpacity:0.5});
-    map.addOverlay(routes[i]);
+    (function(x){
+      var color;
+      if (data.route[x].speed < 19) {
+        color = "#ff0000";
+        var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length/2].lng,data.route[x].points[data.route[x].points.length/2].lat));
+        map.addOverlay(routeMarker);
+        routeMarker.show();
+        var windowOpt = {
+          width: 300,
+          height: 150,
+          title: "<strong>" + data.route[x].name + "</strong>"
+        }
+        var windowContent = "平均速率 : " + data.route[x].speed + " km/hr<br />建議改道路段 :<br/>" + data.route[x].suggestion;
+        var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
+        routeMarker.addEventListener("click", function(){
+          this.openInfoWindow(infoWindow);
+        });  
+      }
+      else if (data.route[x].speed >= 19 && data.route[x].speed < 40) {
+        color = "#ff9900";
+      }
+      else{
+        color = "#009900";
+      }
+      var pots = new Array(data.route[x].points.length);
+      for(var j = 0; j < data.route[x].points.length; j++){
+        pots[j] = new BMap.Point(data.route[x].points[j].lng,data.route[x].points[j].lat);
+      }
+      var route = new BMap.Polyline(pots,{strokeColor:color, strokeWeight:6, strokeOpacity:0.5});
+      map.addOverlay(route);
+      })(i);
   }
 }
