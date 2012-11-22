@@ -21,7 +21,7 @@ function updateTime(){
 
 
 var map = new BMap.Map("map");
-var point = new BMap.Point(120.8792,31.4570);
+var point = new BMap.Point(120.861228,31.439859);
 map.centerAndZoom(point,15);
 map.enableScrollWheelZoom();
 map.addControl(new BMap.NavigationControl());
