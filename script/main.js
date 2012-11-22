@@ -1,9 +1,11 @@
+//lng + 0.0065, lat + 0.0060
+
 var scrollAmount = 0;
 
 function scr() {
     window.scrollBy(0,5);
     scrollAmount += 5;
-    if(scrollAmount < 300) {
+    if(scrollAmount < 1000) {
         scrolldelay = setTimeout('scr()',1);
     }
 }
@@ -44,18 +46,19 @@ function loadDATA(callback){
 setTimeout(loadDATA(), 1);
 
 function showCMS(){
+  scrollAmount = 0;
   scr();
   map.clearOverlays();
   var myIcon = new BMap.Icon("stylesheet/image/cms.gif", new BMap.Size(35,35));
   for(var i = 0; i < data.cms.length; i++){
     (function(x){
-      var cms = new BMap.Marker(new BMap.Point(data.cms[x].lng,data.cms[x].lat),{icon:myIcon});
+      var cms = new BMap.Marker(new BMap.Point(data.cms[x].lng + 0.0065,data.cms[x].lat + 0.0060),{icon:myIcon});
       map.addOverlay(cms);
       cms.show();
       cms.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
         width: 200,
-        height: 80,
+        height: 100,
         title: "<strong>" + data.cms[x].name + "</strong>"
       }
       var windowContent = "";
@@ -71,12 +74,13 @@ function showCMS(){
 }
 
 function showVD(){
+  scrollAmount = 0;
   scr();
   map.clearOverlays();
   var myIcon = new BMap.Icon("stylesheet/image/vd.gif", new BMap.Size(35,35));
   for(var i = 0; i < data.vd.length; i++){
     (function(x){
-      var vd = new BMap.Marker(new BMap.Point(data.vd[x].lng,data.vd[x].lat), {icon:myIcon});
+      var vd = new BMap.Marker(new BMap.Point(data.vd[x].lng + 0.0065,data.vd[x].lat + 0.0060), {icon:myIcon});
       map.addOverlay(vd);
       vd.show();
       vd.setAnimation(BMAP_ANIMATION_BOUNCE);
@@ -91,10 +95,11 @@ function showVD(){
         this.openInfoWindow(infoWindow);
       });
     })(i);
-  }
+  }  
 }
 
 function showPolyline(){
+  scrollAmount = 0;
   scr();
   map.clearOverlays();
   for(var i = 0; i < data.route.length; i++){
@@ -102,7 +107,7 @@ function showPolyline(){
       var color;
       if (data.route[x].speed < 19) {
         color = "#ff0000";
-        var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length/2].lng,data.route[x].points[data.route[x].points.length/2].lat));
+        var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length/2].lng + 0.0065,data.route[x].points[data.route[x].points.length/2].lat + 0.0060));
         map.addOverlay(routeMarker);
         routeMarker.show();
         routeMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
@@ -125,7 +130,7 @@ function showPolyline(){
       }
       var pots = new Array(data.route[x].points.length);
       for(var j = 0; j < data.route[x].points.length; j++){
-        pots[j] = new BMap.Point(data.route[x].points[j].lng,data.route[x].points[j].lat);
+        pots[j] = new BMap.Point(data.route[x].points[j].lng + 0.0065,data.route[x].points[j].lat + 0.0060);
       }
       var route = new BMap.Polyline(pots,{strokeColor:color, strokeWeight:6, strokeOpacity:0.5});
       map.addOverlay(route);
