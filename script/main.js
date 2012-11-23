@@ -57,9 +57,9 @@ function showCMS(){
       cms.show();
       cms.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
-        width: 200,
-        height: 100,
-        title: "<strong>" + data.cms[x].name + "</strong>"
+        width: 300,
+        height: 200,
+        title: "<strong>" + data.cms[x].name + "</strong> - <strong>" + data.cms[x].location + "</strong><hr />"
       }
       var windowContent = "";
       for(var j = 0; j < data.cms[x].info.length; j++){
