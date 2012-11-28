@@ -1,5 +1,3 @@
-//lng + 0.0065, lat + 0.0060
-
 var scrollAmount = 0;
 
 function scr() {
@@ -58,8 +56,8 @@ function showCMS(){
       cms.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
         width: 300,
-        height: 200,
-        title: "<strong>" + data.cms[x].name + "</strong> - <strong>" + data.cms[x].location + "</strong><hr />"
+        height: 150,
+        title: "<strong>" + data.cms[x].name + " - " + data.cms[x].location + "</strong><hr />"
       }
       var windowContent = "";
       for(var j = 0; j < data.cms[x].info.length; j++){
@@ -85,9 +83,9 @@ function showVD(){
       vd.show();
       vd.setAnimation(BMAP_ANIMATION_BOUNCE);
       var windowOpt = {
-        width: 200,
-        height: 80,
-        title: "<strong>" + data.vd[x].name + "</strong>"
+        width: 300,
+        height: 150,
+        title: "<strong>" + data.vd[x].name + " - " + data.vd[x].location + "</strong><hr />"
       }
       var windowContent = "平均速度 : " + data.vd[x].info.avgspeed + "<br />最大流量 : " + data.vd[x].info.bigvolumn;
       var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
