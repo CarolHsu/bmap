@@ -4,11 +4,9 @@ body {
   line-height: 18px;
   color: #444;
   background-color: #333;
-  height: 100%;
 }
 
 html{
-  height: 100%;
 
 }
 
@@ -19,7 +17,7 @@ html{
 }
 
 #content.container-fluid{
-  height: 90%;
+  height: 100%;
 }
 
 #content{
@@ -53,19 +51,33 @@ html{
 }
 
 .horselight {
-  overflow-style: marquee-line;   /* W3C(標準用法) */
+  overflow-style: marquee-line;    /* W3C(標準用法) */
   marquee-style: scroll;      /* W3C(標準用法) */
   marquee-play-count: infinite;   /* W3C(標準用法) */
-  marquee-speed: normal;
 
- overflow: -webkit-marquee;   /* Chrome, Safari 必加 */
+  overflow: -webkit-marquee;    /* Chrome, Safari 必加 */
   -webkit-marquee-style: scroll;    /* Chrome, Safari */
   -webkit-marquee-repetition: infinite; /* Chrome, Safari */
-  -webkit-marquee-speed: normal;
 }
 
 .head-shadow{
   -moz-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
   -webkit-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
   box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+}
+
+#menu img:hover {
+  cursor: pointer;
+}
+
+#content .alert {
+  height:15px;
+}
+
+#content .alert p {
+  margin-top: 40px;
+}
+
+#content .alert p:hover {
+  cursor: pointer;
 }

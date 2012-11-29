@@ -1,11 +1,25 @@
 var scrollAmount = 0;
 
+
 function scr() {
-    window.scrollBy(0,5);
-    scrollAmount += 5;
+    window.scrollBy(0,20);
+    scrollAmount += 20;
     if(scrollAmount < 1000) {
         scrolldelay = setTimeout('scr()',1);
     }
+}
+
+function scrUp() {
+    window.scrollBy(0,-20);
+    scrollAmount += 20;
+    if(scrollAmount < 1000) {
+        scrolldelay = setTimeout('scrUp()',1);
+    }
+}
+
+function back() {
+  scrollAmount = 0;
+  scrUp();
 }
 
 function updateTime(){
@@ -19,25 +33,29 @@ function updateTime(){
 
 
 var map = new BMap.Map("map");
-var point = new BMap.Point(120.861228,31.439859);
+var point = new BMap.Point(120.871936, 31.464811);
 map.centerAndZoom(point,15);
 map.enableScrollWheelZoom();
 map.addControl(new BMap.NavigationControl());
 
+
+// map.addEventListener("click", function(e){
+//   alert(e.point.lng + ", " + e.point.lat);
+// });
 //json data
 var data;
 
 function loadDATA(callback){
   $.ajax({
     url:"JSON/data.json",
-    type:"GET",
+    type:"POST",
     dataType:"json",
     success: function(json){
       data = json;
       setTimeout(loadDATA(), 60000);
     },
-    error: function(){
-      alert("error...");
+    error: function(result){
+      alert("FAILED : " + result.status + ' ' + result.statusText);
     }
   });
 }
@@ -87,7 +105,7 @@ function showVD(){
         height: 150,
         title: "<strong>" + data.vd[x].name + " - " + data.vd[x].location + "</strong><hr />"
       }
-      var windowContent = "平均速度 : " + data.vd[x].info.avgspeed + "<br />最大流量 : " + data.vd[x].info.bigvolumn;
+      var windowContent = "平均速度 : " + data.vd[x].info.avgspeed + " km/hr<br />最大流量 : " + data.vd[x].info.bigvolumn;
       var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
       vd.addEventListener("click", function(){
         this.openInfoWindow(infoWindow);
@@ -105,16 +123,16 @@ function showPolyline(){
       var color;
       if (data.route[x].speed < 19) {
         color = "#ff0000";
-        var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length/2].lng + 0.0065,data.route[x].points[data.route[x].points.length/2].lat + 0.0060));
+        var routeMarker = new BMap.Marker(new BMap.Point(data.route[x].points[data.route[x].points.length - 1].lng + 0.0065,data.route[x].points[data.route[x].points.length - 1].lat + 0.0060));
         map.addOverlay(routeMarker);
         routeMarker.show();
         routeMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
         var windowOpt = {
           width: 300,
           height: 150,
-          title: "<strong>" + data.route[x].name + "</strong>"
+          title: "<strong>路段状况 - 壅塞</strong><hr />"
         }
-        var windowContent = "平均速率 : " + data.route[x].speed + " km/hr<br />建議改道路段 :<br/>" + data.route[x].suggestion;
+        var windowContent = "平均速率 : " + data.route[x].speed + " km/hr<br />" + data.route[x].suggestion;
         var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
         routeMarker.addEventListener("click", function(){
           this.openInfoWindow(infoWindow);
