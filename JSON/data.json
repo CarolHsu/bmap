@@ -198,7 +198,7 @@
 				}
 			],
 			"speed":15,
-			"suggestion":"城北西路壅塞: <span style=\"color:#ff9900;\">湖亭西路 至 湖滨路 </span><span style=\"color:#ff0000;\">壅塞</span><br />建議改道路段: <span style=\"color:#009900;\">蟹舫苑右转</span> 改道 <span style=\"color:#009900;\">湖亭西路</span>"
+			"suggestion":"城北西路: 湖亭西路 至 湖滨路 <span style=\"color:#ff0000;\">壅塞</span><br />建議改道路段: <span style=\"color:#009900;\">蟹舫苑右转</span> 改道 <span style=\"color:#009900;\">湖亭西路</span>"
 		},
 		{
 			"id":"L00112",

@@ -132,7 +132,7 @@ function showPolyline(){
           height: 150,
           title: "<strong>路段状况 - 壅塞</strong><hr />"
         }
-        var windowContent = "平均速率 : " + data.route[x].speed + " km/hr<br />" + data.route[x].suggestion;
+        var windowContent = "平均速率: " + data.route[x].speed + " km/hr<br />" + data.route[x].suggestion;
         var infoWindow = new BMap.InfoWindow(windowContent, windowOpt);
         routeMarker.addEventListener("click", function(){
           this.openInfoWindow(infoWindow);
