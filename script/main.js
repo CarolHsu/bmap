@@ -2,11 +2,11 @@ var scrollAmount = 0;
 
 
 function scr() {
-    window.scrollBy(0,20);
-    scrollAmount += 20;
-    if(scrollAmount < 1000) {
-        scrolldelay = setTimeout('scr()',1);
-    }
+    // window.scrollBy(0,20);
+    // scrollAmount += 20;
+    // if(scrollAmount < 1000) {
+    //     scrolldelay = setTimeout('scr()',1);
+    // }
 }
 
 function scrUp() {
@@ -45,17 +45,17 @@ map.addControl(new BMap.NavigationControl());
 //json data
 var data;
 
-function loadDATA(callback){
+function loadDATA(){
   $.ajax({
     url:"JSON/data.json",
-    type:"POST",
+    type:"GET",
     dataType:"json",
     success: function(json){
       data = json;
       setTimeout(loadDATA(), 60000);
     },
     error: function(result){
-      alert("FAILED : " + result.status + ' ' + result.statusText);
+      console.log("FAILED : " + result.status + ' ' + result.statusText);
     }
   });
 }
