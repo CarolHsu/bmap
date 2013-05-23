@@ -9,28 +9,45 @@ function scr() {
     // }
 }
 
-function scrUp() {
-    window.scrollBy(0,-20);
-    scrollAmount += 20;
-    if(scrollAmount < 1000) {
-        scrolldelay = setTimeout('scrUp()',1);
-    }
-}
+// function scrUp() {
+//     window.scrollBy(0,-20);
+//     scrollAmount += 20;
+//     if(scrollAmount < 1000) {
+//         scrolldelay = setTimeout('scrUp()',1);
+//     }
+// }
 
-function back() {
-  scrollAmount = 0;
-  scrUp();
+// function back() {
+//   scrollAmount = 0;
+//   scrUp();
+// }
+
+$(document).ready(function(){
+  loadDATA();
+  setInterval(showtime, 1000);
+  setInterval(loadDATA, 10000);
+});
+
+function showtime(){
+  var timestr = updateTime();
+  $("#time").text(timestr);
 }
 
 function updateTime(){
+  var now = new Date();
   var hour        = now.getHours();
   var minute      = now.getMinutes();
   var second      = now.getSeconds();
-  var monthnumber = now.getMonth();
+  var monthnumber = now.getMonth() + 1;
   var monthday    = now.getDate();
-  var year        = now.getYear();
+  var year        = now.getYear() + 1900;
+  if (hour   < 10) {hour   = "0"+hour;}
+  if (minute < 10) {minute = "0"+minute;}
+  if (second < 10) {second = "0"+second;}
+  var timenow = year + " 年 " + monthnumber + " 月 " + monthday + " 日 " + hour + ":" + minute + ":" + second;
+  console.log(timenow);
+  return timenow;
 }
-
 
 var map = new BMap.Map("map");
 var point = new BMap.Point(120.871936, 31.464811);
@@ -51,15 +68,19 @@ function loadDATA(){
     type:"GET",
     dataType:"json",
     success: function(json){
+      console.log("seccess.");
+      updateTime();
       data = json;
-      setTimeout(loadDATA(), 60000);
+      // setTimeout(loadDATA(), 60000);
     },
     error: function(result){
       console.log("FAILED : " + result.status + ' ' + result.statusText);
     }
   });
 }
-setTimeout(loadDATA(), 1);
+
+// loadDATA();
+// setInterval(loadDATA(), 60000);
 
 function showCMS(){
   scrollAmount = 0;
