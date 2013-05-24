@@ -1,84 +1,86 @@
 body {
-  font-family: Verdana, "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  color: #444;
-  background-color: #333;
+    font-family: Verdana, "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #444;
+    background-color: #333;
 }
 
-html{
-
+html {
 }
 
-
-#header{
-  background-image: url(image/head/theme.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
+#header {
+    background-image: url(image/head/theme.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-#content.container-fluid{
-  height: 100%;
+#content.container-fluid {
+    height: 100%;
 }
 
-#content{
-  background-image:url(image/old_mathematics.png);
+#content {
+    background-image: url(image/old_mathematics.png);
 }
 
-#menu{
-  background-image:url(image/old_mathematics.png);
+#menu {
+    background-image: url(image/old_mathematics.png);
 }
 
-.row-fluid,.span9{
-  height: 90%;
+.row-fluid,.span9 {
+    height: 90%;
 }
 
-.span3{
-  height: 600px;
+.span3 {
+    height: 600px;
 }
-
 
 #map {
-  height: 100%;
-  position: relative;
+    height: 100%;
+    position: relative;
 }
 
 #map img {
-  max-width: none;
+    max-width: none;
 }
 
 #sidebar {
-  height: 200px;
+    height: 200px;
 }
 
 .horselight {
-  overflow-style: marquee-line;    /* W3C(標準用法) */
-  marquee-style: scroll;      /* W3C(標準用法) */
-  marquee-play-count: infinite;   /* W3C(標準用法) */
-
-  overflow: -webkit-marquee;    /* Chrome, Safari 必加 */
-  -webkit-marquee-style: scroll;    /* Chrome, Safari */
-  -webkit-marquee-repetition: infinite; /* Chrome, Safari */
+    overflow-style: marquee-line;
+    /* W3C(標準用法) */
+    marquee-style: scroll;
+      /* W3C(標準用法) */
+    marquee-play-count: infinite;
+   /* W3C(標準用法) */
+    overflow: -webkit-marquee;
+    /* Chrome, Safari 必加 */
+    -webkit-marquee-style: scroll;
+    /* Chrome, Safari */
+    -webkit-marquee-repetition: infinite;
+ /* Chrome, Safari */
 }
 
-.head-shadow{
-  -moz-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
-  -webkit-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
-  box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+.head-shadow {
+    -moz-box-shadow: 4px 4px 3px rgba(20%,20%,40%,0.5);
+    -webkit-box-shadow: 4px 4px 3px rgba(20%,20%,40%,0.5);
+    box-shadow: 4px 4px 3px rgba(20%,20%,40%,0.5);
 }
 
 #menu img:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #content .alert {
-  height:15px;
+    height: 15px;
 }
 
 #content .alert p {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 #content .alert p:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
